@@ -36,9 +36,9 @@ We made use of the pgamma function from R which includes the source files:
 bd0.c chebyshev.c dnorm.c dpois.c dpq.h fmax2.c ftrunc.c gamma.c lgamma.c lgammacor.c mlutils.c nmath.h pgamma.c pnorm.c stirlerr.c (licensed under ‘GPL (version 2 or later)’)  
 Rmath.h Arith.h Boolean.h Error.h Print.h RS.h Random.h libextern.h (licensed under ‘LGPL (version 2.1 or later)’)  
 
+*****************************************************************
 
-
-GNU GENERAL PUBLIC LICENSE
+              GNU GENERAL PUBLIC LICENSE
 		       Version 2, June 1991
 
  Copyright (C) 1989, 1991 Free Software Foundation, Inc.
@@ -381,10 +381,9 @@ Public License instead of this License.
 
 
 
+*****************************************************************
 
-
-
-GNU LESSER GENERAL PUBLIC LICENSE
+                  GNU LESSER GENERAL PUBLIC LICENSE
                        Version 2.1, February 1999
 
  Copyright (C) 1991, 1999 Free Software Foundation, Inc.
