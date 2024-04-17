@@ -90,7 +90,7 @@ Input Options:
 
 --fileNames
   Paths to the summary statistics files.
-
+```
 
 <br /> 
 <br />
