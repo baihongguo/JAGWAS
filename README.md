@@ -7,10 +7,13 @@ Current version: 1.0.0
 ## Quick Installation 
 
 Option 1: Use the binary executable file for Linux
-* Download the binary file from the main directory or run the following line of code:
+* Download the binary executable JAGWAS from the main directory or run the following line of code:
 ```
 git clone https://github.com/baihongguo/JAGWAS
 cd JAGWAS
+```
+Then change the permission:
+```
 chmod a+x JAGWAS
 ```
 
