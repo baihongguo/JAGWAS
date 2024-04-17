@@ -16,7 +16,7 @@ chmod a+x JAGWAS
 
 Option 2: Build JAGWAS Library Dependencies  
    * C++11 compiler or later 
-   * BLAS/LAPACK. For Intel processors, we recommend that GEM be compiled with an optimized math routine library such as the Intel oneAPI Math Kernal Library to replace BLAS/LAPACK for optimal performance.  
+   * BLAS/LAPACK. For Intel processors, we recommend that JAGWAS be compiled with an optimized math routine library such as the Intel oneAPI Math Kernal Library to replace BLAS/LAPACK for optimal performance.  
    * Armadillo Library. 
 <br />
 <br />
@@ -26,7 +26,7 @@ C/C++ Compiler
  * A compiler with C++11 (or later) support is required.
  
 LAPACK and BLAS
- * The LAPACK (Linear Algebra PACKage) and BLAS (Basic Linear Algebra Subprograms) libraries are used for matrix operations in GEM.
+ * The LAPACK (Linear Algebra PACKage) and BLAS (Basic Linear Algebra Subprograms) libraries are used for matrix operations in JAGWAS.
 
 Intel processors:
  * We recommend linking JAGWAS to the Intel oneAPI Math Kernal Library (oneMKL), instead of classical BLAS/LAPACK, for a greater performance boost. This can be done by replacing -llapack and -lblas in the makefile with -lmkl_gf_lp64 -lmkl_sequential -lmkl_core before compiling.
@@ -68,13 +68,13 @@ Input Options:
   Minimum threshold value [0, 0.5] to exclude variants based on the minor allele frequency.
 
 --score_test
-  If the summary statistics files are from a score test, 1 = True, 0 = False. 0 means the          summary statistics files are from a Wald test.
+  If the summary statistics files are from a score test, 1 = True, 0 = False. 0 means the summary statistics files are from a Wald test.
 
 --beta_se
-  If the summary statistics files are in a beta/se format from the Wald test, 1 = True, 0 =        False. When score_test=0, and beta_se=0, this means that the summary statistics files have the   z-scores.
+  If the summary statistics files are in a beta/se format from the Wald test, 1 = True, 0 = False. When score_test=0, and beta_se=0, this means that the summary statistics files have the z-scores.
 
 --logP
-  Whether to output the p-values in log10 scale, thus can getting p-values smaller than the        double precision limit, 1 = True, 0 = False.
+  Whether to output the p-values in log10 scale, thus can getting p-values smaller than the double precision limit, 1 = True, 0 = False.
 
 --fileNames
   Paths to the summary statistics files.
