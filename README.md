@@ -18,12 +18,6 @@ Option 2: Build JAGWAS Library Dependencies
    * C++11 compiler or later 
    * BLAS/LAPACK. For Intel processors, we recommend that GEM be compiled with an optimized math routine library such as the Intel oneAPI Math Kernal Library to replace BLAS/LAPACK for optimal performance.  
    * Armadillo Library. 
-
-<br />
-
- make  
- ```
-<br />
 <br />
 <br />
 
