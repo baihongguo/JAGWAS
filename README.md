@@ -32,7 +32,6 @@ To install JAGWAS, run the following lines of code:
 <br />
 <br />
 
-
 ## Dependencies
 C/C++ Compiler
  * A compiler with C++11 (or later) support is required.
@@ -67,7 +66,6 @@ Armadillo Library
 
 Once JAGWAS is installed, the executable can be used to run the program.  
 <details>
-     <summary> <b>List of Options</b> </summary>
 
 ```
 Input Options:
