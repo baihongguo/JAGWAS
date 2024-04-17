@@ -65,8 +65,6 @@ Armadillo Library
 ### Command Line Options
 
 Once JAGWAS is installed, the executable can be used to run the program.  
-<details>
-
 ```
 Input Options:
 --outputFilePath
