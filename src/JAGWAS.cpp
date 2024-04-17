@@ -8,21 +8,20 @@
 #include <string> 
 #include <armadillo>
 #include <cstdlib> 
+#include <map>
 
-
-#include </HGCNT95FS/ADDLIE/work/Test/JAGWAS_C++/pgamma.c>
-#include </HGCNT95FS/ADDLIE/work/Test/JAGWAS_C++/lgamma.c>
-#include </HGCNT95FS/ADDLIE/work/Test/JAGWAS_C++/fmax2.c>
-#include </HGCNT95FS/ADDLIE/work/Test/JAGWAS_C++/mlutils.c>
-//#include </HGCNT95FS/ADDLIE/work/Test/JAGWAS_C++/dpois.c>
-#include </HGCNT95FS/ADDLIE/work/Test/JAGWAS_C++/dnorm.c>
-#include </HGCNT95FS/ADDLIE/work/Test/JAGWAS_C++/pnorm.c>
-#include </HGCNT95FS/ADDLIE/work/Test/JAGWAS_C++/ftrunc.c>
-#include </HGCNT95FS/ADDLIE/work/Test/JAGWAS_C++/gamma.c>
-#include </HGCNT95FS/ADDLIE/work/Test/JAGWAS_C++/lgammacor.c>
-#include </HGCNT95FS/ADDLIE/work/Test/JAGWAS_C++/stirlerr.c>
-#include </HGCNT95FS/ADDLIE/work/Test/JAGWAS_C++/bd0.c>
-#include </HGCNT95FS/ADDLIE/work/Test/JAGWAS_C++/chebyshev.c>
+#include <pgamma.c>
+#include <lgamma.c>
+#include <fmax2.c>
+#include <mlutils.c>
+#include <dnorm.c>
+#include <pnorm.c>
+#include <ftrunc.c>
+#include <gamma.c>
+#include <lgammacor.c>
+#include <stirlerr.c>
+#include <bd0.c>
+#include <chebyshev.c>
 
 
 void processFiles(const std::string& outputPath, const std::string& Cor_M, int nrow , double MAF, bool score_test, bool Beta_se , bool logP, const std::vector<std::string>& fileNames) {
@@ -282,20 +281,57 @@ if (Beta_se == true) {
 
         
 
-
-
 int main(int argc, char* argv[]) {
+
+    std::map<std::string, std::string> cmdArgs;
+    std::map<std::string, bool> knownArgs {
+        {"--outputFilePath", false},
+        {"--cor_matrix", false},
+        {"--nrow", false},
+        {"--MAF", false},
+        {"--score_test", false},
+        {"--beta_se", false},
+        {"--logP", false},
+        {"--fileNames", false}
+    };
     
-    std::string outputFilePath(argv[1]);
-    std::string cor_m(argv[2]);
-    int nrow = std::atoi(argv[3]);
-    double MAF = std::stod(argv[4]);
-    bool score_test = std::stoi(argv[5]) != 0;
-    bool beta_se = std::stoi(argv[6]) != 0;
-    bool logP = std::stoi(argv[7]) != 0;
+
+
+
+for (int i = 1; i < argc; ++i) {
+        std::string arg(argv[i]);
+
+        if (arg.substr(0, 2) == "--") {
+            // Check if the argument is known
+            if (knownArgs.find(arg) != knownArgs.end()) {
+                if (i + 1 < argc) { // Make sure we are not at the end of argv!
+                    cmdArgs[arg] = argv[i + 1];  // Add the argument to our map
+                    knownArgs[arg] = true;  // Mark this argument as found
+                    i++;  // Increment 'i' so we don't try to process the value as a key
+                } else {
+                    std::cerr << "Value for " << arg << " not specified." << std::endl;
+                    return 1;
+                }
+            } else {
+                std::cerr << "Unknown argument: " << arg << std::endl;
+                return 1;
+            }
+        }
+    }
+
+
+
+
+    std::string outputFilePath(argv[2]);
+    std::string cor_m(argv[4]);
+    int nrow = std::atoi(argv[6]);
+    double MAF = std::stod(argv[8]);
+    bool score_test = std::stoi(argv[10]) != 0;
+    bool beta_se = std::stoi(argv[12]) != 0;
+    bool logP = std::stoi(argv[14]) != 0;
     
     std::vector<std::string> fileNames;
-    for (int i = 8; i < argc; ++i) {
+    for (int i = 16; i < argc; ++i) {
         fileNames.push_back(argv[i]);
     }
 
