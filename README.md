@@ -29,8 +29,7 @@ LAPACK and BLAS
  * The LAPACK (Linear Algebra PACKage) and BLAS (Basic Linear Algebra Subprograms) libraries are used for matrix operations in GEM.
 
 Intel processors:
- * We recommend linking GEM to the Intel oneAPI Math Kernal Library (oneMKL), instead of classical BLAS/LAPACK, for a greater performance boost. This can be done by replacing -llapack and -lblas in the makefile with -lmkl_gf_lp64 -lmkl_sequential -lmkl_core before compiling.
-  * It is important to compile with -lmkl_sequential since GEM already does multi-threading across SNPs.
+ * We recommend linking JAGWAS to the Intel oneAPI Math Kernal Library (oneMKL), instead of classical BLAS/LAPACK, for a greater performance boost. This can be done by replacing -llapack and -lblas in the makefile with -lmkl_gf_lp64 -lmkl_sequential -lmkl_core before compiling.
 
 AMD processors:
  * For AMD processors, OpenBLAS (-lopenblas) may be a better alternative.
@@ -41,7 +40,7 @@ Armadillo Library
 
 ## Usage
 
-### Running GEM
+### Running JAGWAS
 
 1. [Command Line Options](#command-line-options)  
 1. [Input Files](#input-files)
@@ -141,6 +140,17 @@ To run JAGWAS using the example data, execute JAGWAS with the following code.
 ./JAGWAS --outputFilePath outputFilePath/example_JAGWAS.txt --cor_matrix pathTo/matrix.txt --nrow 3 --MAF 0 --score_test 0 --beta_se 1 --logP 0 --fileNames pathTo/discovery_QT0.txt pathTo/discovery_QT1.txt
 
 ```
-The results should look like the following output file [my_example.out](https://github.com/large-scale-gxe-methods/GEM/blob/master/example/my_example.out).  
-
+The results should look like. 
+```diff
+CHR	SNP	POS	A1	A2	N	AF1	P
+1	rs539032812	665266	T	C	22880	0.981101	0.875815
+1	rs149887893	714596	T	C	22880	0.96833	0.724438
+1	rs12184267	715265	C	T	22880	0.964588	0.855705
+1	rs12184277	715367	A	G	22880	0.964621	0.863347
+1	rs12184279	717485	C	A	22880	0.964754	0.818601
+1	rs144155419	717587	G	A	22880	0.983974	0.569762
+1	rs116801199	720381	G	T	22880	0.964323	0.811919
+1	rs12565286	721290	G	C	22880	0.964186	0.793858
+1	rs2977670	723891	G	C	22880	0.0389927	0.960416
+```
 <br />
