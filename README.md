@@ -21,11 +21,6 @@ Option 2: Build JAGWAS Library Dependencies
 
 <br />
 
-To install JAGWAS, run the following lines of code:
- ```
- git clone https://github.com/baihongguo/JAGWAS
- cd JAGWAS
- cd src/  
  make  
  ```
 <br />
