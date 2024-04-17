@@ -62,7 +62,7 @@ Input Options:
   A text file including the correlation matrix of the phenotypes
 
 --nrow
-  The number of rows each time JAGWAS processes, you can set it to 10000 to save memory, the maximum is the total number of SNPs.
+  The number of rows of results each time JAGWAS processes and writes out, may affect memory usage, 1000-50000 is recommended. The maximum is the total number of SNPs.
 
 --MAF
   Minimum threshold value [0, 0.5] to exclude variants based on the minor allele frequency.
