@@ -31,14 +31,8 @@ C/C++ Compiler
 LAPACK and BLAS
  * The LAPACK (Linear Algebra PACKage) and BLAS (Basic Linear Algebra Subprograms) libraries are used for matrix operations in JAGWAS.
 
-Intel processors:
- * We recommend linking JAGWAS to the Intel oneAPI Math Kernal Library (oneMKL), instead of classical BLAS/LAPACK, for a greater performance boost. This can be done by replacing -llapack and -lblas in the makefile with -lmkl_gf_lp64 -lmkl_sequential -lmkl_core before compiling.
-
-AMD processors:
- * For AMD processors, OpenBLAS (-lopenblas) may be a better alternative.
-
 Armadillo Library
- * The Armadillo library is used for matrix operations.
+ * The Armadillo library is used for matrix operations, which is dependent on LAPACK and BLAS.
 
 
 ## Usage
