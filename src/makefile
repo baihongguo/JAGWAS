@@ -6,8 +6,9 @@ LIBS= -larmadillo
 
 C_SOURCES= $(/HGCNT95FS/ADDLIE/work/Test/JAGWAS_C++/machine/JAGWAS/thirdparty/R_pgamma/*.c)
 CXX_SOURCES= JAGWAS.cpp
+C_OBJECTS = $(C_SOURCES:.c=.o)
 CXX_OBJECTS= JAGWAS.o
-OBJS= $(CXX_OBJECTS)
+OBJS= $(CXX_OBJECTS) $(C_OBJECTS)
 
 #targets
 all: JAGWAS
@@ -17,6 +18,9 @@ JAGWAS: $(CXX_OBJECTS) $(C_OBJECTS)
 
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+%.o: %.c
+	$(CC) $(CXXFLAGS) -c $< -o $@
 
 .PHONY: clean
 clean:
