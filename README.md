@@ -81,7 +81,7 @@ Input Options:
 <br />
 
 ### Input File Format
-The input summary files should be tab-separated.
+The input summary files should be tab-separated (Will provide a more flexible format (user-specified) in later version).
 * #### Score test File Format
 The output from the GMMAT score test is set as the standard input format by JAGWAS:
 ```diff 
