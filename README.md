@@ -56,7 +56,7 @@ Input Options:
   Path to the output file.
 
 --cor_matrix
-  A text file including the correlation matrix of the phenotypes
+  A text file including the correlation matrix of the phenotypes, and the order of the phenotypes in the correlation matrix should match with the order of the summary statistics files in the input command. 
 
 --nrow
   The number of rows of results each time JAGWAS processes and writes out, may affect memory usage, 1000-50000 is recommended. The maximum is the total number of SNPs.
