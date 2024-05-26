@@ -10,10 +10,12 @@
 #include <cstdlib> 
 #include <map>
 
+// Dependencies for the log10P option
 #include <pgamma.c>
 #include <lgamma.c>
 #include <fmax2.c>
 #include <mlutils.c>
+//#include </HGCNT95FS/ADDLIE/work/Test/JAGWAS_C++/dpois.c>
 #include <dnorm.c>
 #include <pnorm.c>
 #include <ftrunc.c>
@@ -24,12 +26,13 @@
 #include <chebyshev.c>
 
 
-void processFiles(const std::string& outputPath, const std::string& Cor_M, int nrow , double MAF, bool score_test, bool Beta_se , bool logP, const std::vector<std::string>& fileNames) {
+void processFiles(const std::string& outputPath, const std::string& Cor_M, int nrow , double MAF, bool score_test, bool Beta_se , bool logP, std::string delimiter, const std::vector<std::string>& fileNames) {
  
     int nline = nrow;
     double AF;
     double AF1;
     arma::mat cor;
+    char delim;
     std::string value;
     std::string Value;
     std::string line;
@@ -40,7 +43,7 @@ void processFiles(const std::string& outputPath, const std::string& Cor_M, int n
     std::ofstream results(outputPath);
     std::ostringstream oss;  //buffer
     if (logP == true) {
-    oss << "CHR" << "\t" << "SNP" << "\t" << "POS" << "\t" << "A1" << "\t" << "A2" << "\t" << "N" << "\t" << "AF1" << "\t" << "log10(P)"<< "\n";
+    oss << "CHR" << "\t" << "SNP" << "\t" << "POS" << "\t" << "A1" << "\t" << "A2" << "\t" << "N" << "\t" << "AF1" << "\t" << "log10_P"<< "\n";
     }
     else
     {
@@ -48,6 +51,20 @@ void processFiles(const std::string& outputPath, const std::string& Cor_M, int n
     }
     
     
+//Set up delimiter
+if ((delimiter[0] == '\\' && delimiter[1] == 't') || delimiter[0] == 't') {
+        delim = '\t';
+        }
+        else if ((delimiter[0] == '\\' && delimiter[1] == '0') || delimiter[0] == '0') {
+        delim = ' ';
+        }
+        else {
+        delim = delimiter[0];
+        }
+
+
+
+
     for (size_t f = 0; f < fileNames.size(); f++) {
         // std::ifstream currentFile = openFile(fileNames[f]);
         file_handles.emplace_back(fileNames[f]);
@@ -75,7 +92,7 @@ while (std::getline(file_handles[0], line)) {
          
         std::istringstream iss(line);
         std::vector<std::string> data;
-        while (std::getline(iss, value, '\t')) data.push_back(value);
+        while (std::getline(iss, value, delim)) data.push_back(value);
         AF = std::stod(data[4]);
     if (AF>MAF && AF<(1-MAF))
     {
@@ -92,11 +109,11 @@ while (std::getline(file_handles[0], line)) {
         std::getline(file_handles[f], Line);
         std::istringstream iss(Line);
         std::vector<std::string> data;
-        while (std::getline(iss, Value, '\t')) data.push_back(Value);
+        while (std::getline(iss, Value, delim)) data.push_back(Value);
 
         AF1 = std::stod(data[4]);
         if (AF1 != AF) {
-        std::cerr << "Error: inconsistent variants!" << std::endl;
+        std::cerr << "Warning: inconsistent variants AF!" << std::endl;
         }
        double score = std::stod(data[5]);
         double var = std::stod(data[6]);
@@ -152,7 +169,7 @@ else {
     while (std::getline(file_handles[0], line)) {
         std::istringstream iss(line);
         std::vector<std::string> data;
-        while (std::getline(iss, value, '\t')) data.push_back(value);
+        while (std::getline(iss, value, delim)) data.push_back(value);
         AF = std::stod(data[6]);
     if (AF>MAF && AF<(1-MAF))
     {
@@ -166,7 +183,7 @@ else {
         std::getline(file_handles[f], Line);
         std::istringstream iss(Line);
         std::vector<std::string> data;
-        while (std::getline(iss, Value, '\t')) data.push_back(Value);
+        while (std::getline(iss, Value, delim)) data.push_back(Value);
         zscores[f] = std::stod(data[7]); 
     }
   
@@ -211,7 +228,7 @@ if (Beta_se == true) {
          
         std::istringstream iss(line);
         std::vector<std::string> data;
-        while (std::getline(iss, value, '\t')) data.push_back(value);
+        while (std::getline(iss, value, delim)) data.push_back(value);
         AF = std::stod(data[6]);
     if (AF>MAF && AF<(1-MAF))
     {
@@ -228,11 +245,11 @@ if (Beta_se == true) {
         std::getline(file_handles[f], Line);
         std::istringstream iss(Line);
         std::vector<std::string> data;
-        while (std::getline(iss, Value, '\t')) data.push_back(Value);
+        while (std::getline(iss, Value, delim)) data.push_back(Value);
 
         AF1 = std::stod(data[6]);
         if (AF1 != AF) {
-        std::cerr << "Error: inconsistent variants!" << std::endl;
+        std::cerr << "Warning: inconsistent variants AF!" << std::endl;
         }
         double beta = std::stod(data[7]);
         double se = std::stod(data[8]);
@@ -292,6 +309,7 @@ int main(int argc, char* argv[]) {
         {"--score_test", false},
         {"--beta_se", false},
         {"--logP", false},
+        {"--delim", false},
         {"--fileNames", false}
     };
     
@@ -329,13 +347,14 @@ for (int i = 1; i < argc; ++i) {
     bool score_test = std::stoi(argv[10]) != 0;
     bool beta_se = std::stoi(argv[12]) != 0;
     bool logP = std::stoi(argv[14]) != 0;
+    std::string delimiter(argv[16]);
     
     std::vector<std::string> fileNames;
-    for (int i = 16; i < argc; ++i) {
+    for (int i = 18; i < argc; ++i) {
         fileNames.push_back(argv[i]);
     }
 
-    processFiles(outputFilePath, cor_m, nrow,  MAF, score_test, beta_se, logP, fileNames);
+    processFiles(outputFilePath, cor_m, nrow,  MAF, score_test, beta_se, logP, delimiter, fileNames);
     return 0;
 
 }
