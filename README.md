@@ -158,9 +158,9 @@ CHR	SNP	POS	A1	A2	N	AF1	P
 ## Recent Updates 
 [Version 1.0.1] - May 26, 2024:
 * Change the output variable log10(P) to log10_P to fix the issue that results$log10(P) not working in R since log10() is a built-in function.
-* Add a delim argument to give more flexibility for the format summary statistics files, user now can choose tab, single-space, or comma as the delimiter.  
+* Add a delim argument to give more flexibility to the format of summary statistics files, user now can choose tab, single-space, or comma as the delimiter.  
 
-[Version 1.0.0] - April 14, 2024:Treated empty strings as missing values 
+[Version 1.0.0] - April 14, 2024:
 * The original version of JAGWAS
 
 
