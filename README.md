@@ -2,7 +2,7 @@
 Joint Analysis of multiple phenotype GWAS
 
 <br />
-Current version: 1.0.0 
+Current version: 1.0.1
 
 ## Quick Installation 
 
@@ -73,6 +73,9 @@ Input Options:
 --logP
   Whether to output the p-values in log10 scale, thus can getting p-values smaller than the double precision limit, 1 = True, 0 = False.
 
+--delim
+  Delimiter separating values in the summary statistics file. Tab delimiter should be represented as \t, space delimiter as \0, comma delimiter as ,.
+
 --fileNames
   Paths to the summary statistics files.
 ```
@@ -81,7 +84,7 @@ Input Options:
 <br />
 
 ### Input File Format
-The input summary files should be tab-separated (Will provide a more flexible format (user-specified) in later version).
+The input summary files can be tab, single-space, or comma-separated.
 * #### Score test File Format
 The output from the GMMAT score test is set as the standard input format by JAGWAS:
 ```diff 
@@ -134,7 +137,7 @@ CHR	SNP	POS	A1	A2	N	AF1	P
 
 To run JAGWAS using the example data, execute JAGWAS with the following code.
 ```unix
-./JAGWAS --outputFilePath outputFilePath/example_JAGWAS.txt --cor_matrix pathTo/correlation_matrix.txt --nrow 3 --MAF 0 --score_test 0 --beta_se 1 --logP 0 --fileNames pathTo/discovery_QT0.txt pathTo/discovery_QT1.txt
+./JAGWAS --outputFilePath outputFilePath/example_JAGWAS.txt --cor_matrix pathTo/correlation_matrix.txt --nrow 3 --MAF 0 --score_test 0 --beta_se 1 --logP 0 --delim \t --fileNames pathTo/discovery_QT0.txt pathTo/discovery_QT1.txt
 
 ```
 The results should look like. 
@@ -151,3 +154,13 @@ CHR	SNP	POS	A1	A2	N	AF1	P
 1	rs2977670	723891	G	C	22880	0.0389927	0.960416
 ```
 <br />
+
+## Recent Updates 
+[Version 1.0.1] - May 26, 2024:
+* Change the output variable log10(P) to log10_P to fix the issue that results$log10(P) not working in R since log10() is a built-in function.
+* Add a delim argument to give more flexibility for the format summary statistics files, user now can choose tab, single-space, or comma as the delimiter.  
+
+[Version 1.0.0] - April 14, 2024:Treated empty strings as missing values 
+* The original version of JAGWAS
+
+
